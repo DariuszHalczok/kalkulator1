@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kalkulator kredytowy</title>
+</head>
+<body>
+	<h1>Kalkulator kredytowy</h1>
+	<form>
+		<p>
+			<label for="zadluzenie">Kwota kredytu:</label>
+			<input type="number" id="zadluzenie">
+		</p>
+		<p>
+			<label for="oprocentowanie">Oprocentowanie roczne:</label>
+			<input type="number" id="oprocentowanie">
+		</p>
+		<p>
+			<label for="rata">Wysokość raty:</label>
+			<input type="number" id="rata">
+		</p>
+		<p>
+			<button type="button" onclick="oblicz()">Oblicz</button>
+		</p>
+	</form>
+	<p id="wynik"></p>
+
+	<script>
+		function oblicz() {
+			var zadluzenie = parseFloat(document.getElementById("zadluzenie").value);
+			var oprocentowanie = parseFloat(document.getElementById("oprocentowanie").value);
+			var rata = parseFloat(document.getElementById("rata").value);
+
+			var oprocentowanieMiesieczne = oprocentowanie / 12 / 100;
+			var iloscMiesiecy = Math.round(-Math.log(1 - oprocentowanieMiesieczne * zadluzenie / rata) / Math.log(1 + oprocentowanieMiesieczne));
+
+			document.getElementById("wynik").innerHTML = "Okres spłaty wynosi: " + iloscMiesiecy + " miesięcy";
+		}
+	</script>
+</body>
+</html>
